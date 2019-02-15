@@ -5,8 +5,9 @@ import org.aspectj.bridge.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-@Service
+
 @Slf4j
+@Service
 public class LogConsumer {
     @RabbitListener(queues = CarsApplication.QUEUE_NAME)
     public void consumeMessage(final Message cm) {

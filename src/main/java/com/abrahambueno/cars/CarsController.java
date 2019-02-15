@@ -43,11 +43,17 @@ public class CarsController {
 
     @PostMapping("/upload")
     public List<Cars> newCar(@RequestBody List<Cars> newCars) {
+        LogConsumer message = new LogConsumer();
+        rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return carsrepos.saveAll(newCars);
+
     }
 
     @GetMapping("/id/{id}")
     public Cars findOne(@PathVariable Long id) {
+
+        CarsLog message = new CarsLog();
+        rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return carsrepos.findById(id)
                 .orElseThrow(() -> new CarsNotFoundException(id));
     }
@@ -60,7 +66,8 @@ public class CarsController {
                 cars.add(c);
             }
         }
-
+        CarsLog message = new CarsLog();
+        rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return cars;
 
     }
@@ -73,6 +80,8 @@ public class CarsController {
                 cars.add(c);
             }
         }
+        CarsLog message = new CarsLog();
+        rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return cars;
     }
 
