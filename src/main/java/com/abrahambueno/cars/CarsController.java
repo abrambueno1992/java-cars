@@ -1,4 +1,4 @@
 package com.abrahambueno.cars;
 
-public class CarsControl {
+public class CarsController {
 }

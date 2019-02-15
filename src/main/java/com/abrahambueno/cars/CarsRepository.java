@@ -1,4 +1,6 @@
 package com.abrahambueno.cars;
 
-public interface CarsRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CarsRepository extends JpaRepository<Cars, Long> {
 }
