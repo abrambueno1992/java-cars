@@ -2,6 +2,7 @@ package com.abrahambueno.cars;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -74,4 +75,11 @@ public class CarsController {
         }
         return cars;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCar(@PathVariable Long id) {
+        carsrepos.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
