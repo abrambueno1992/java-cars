@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/cars")
@@ -51,6 +52,17 @@ public class CarsController {
     }
 
     @GetMapping("/year/{year}")
+    public List<Cars> carsByYear(@PathVariable int year) {
+        List<Cars> cars = new ArrayList<>();
+        for (Cars c: carsrepos.findAll()) {
+            if (c.getYear() == year) {
+                cars.add(c);
+            }
+        }
 
-    @GetMapping("/brand/{brand}")
+        return cars;
+
+    }
+
+//    @GetMapping("/brand/{brand}")
 }
