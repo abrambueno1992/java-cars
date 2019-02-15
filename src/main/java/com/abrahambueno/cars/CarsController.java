@@ -52,7 +52,7 @@ public class CarsController {
     @GetMapping("/id/{id}")
     public Cars findOne(@PathVariable Long id) {
 
-        CarsLog message = new CarsLog();
+        CarsLog message = new CarsLog("Looked up cars");
         rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return carsrepos.findById(id)
                 .orElseThrow(() -> new CarsNotFoundException(id));
@@ -66,7 +66,7 @@ public class CarsController {
                 cars.add(c);
             }
         }
-        CarsLog message = new CarsLog();
+        CarsLog message = new CarsLog("Looked up cars");
         rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return cars;
 
@@ -80,7 +80,7 @@ public class CarsController {
                 cars.add(c);
             }
         }
-        CarsLog message = new CarsLog();
+        CarsLog message = new CarsLog("Looked up cars");
         rt.convertAndSend(CarsApplication.QUEUE_NAME, message.toString());
         return cars;
     }
