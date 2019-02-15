@@ -2,10 +2,7 @@ package com.abrahambueno.cars;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,4 +43,14 @@ public class CarsController {
     public List<Cars> newCar(@RequestBody List<Cars> newCars) {
         return carsrepos.saveAll(newCars);
     }
+
+    @GetMapping("/id/{id}")
+    public Cars findOne(@PathVariable Long id) {
+        return carsrepos.findById(id)
+                .orElseThrow(() -> new CarsNotFoundException(id));
+    }
+
+    @GetMapping("/year/{year}")
+
+    @GetMapping("/brand/{brand}")
 }
