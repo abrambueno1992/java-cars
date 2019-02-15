@@ -64,5 +64,14 @@ public class CarsController {
 
     }
 
-//    @GetMapping("/brand/{brand}")
+    @GetMapping("/brand/{brand}")
+    public List<Cars> carsByBrand(@PathVariable String brand) {
+        List<Cars> cars = new ArrayList<>();
+        for (Cars c : carsrepos.findAll()) {
+            if (c.getBrand().toLowerCase().equals(brand.toLowerCase())) {
+                cars.add(c);
+            }
+        }
+        return cars;
+    }
 }
